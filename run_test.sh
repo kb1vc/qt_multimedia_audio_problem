@@ -15,9 +15,9 @@ popd
 
 if [ ! -f build_qt6 ] ; then
     mkdir build_qt6
-    cd build_qt6
+    pushd build_qt6
 else
-    cd build_qt6    
+    pushd build_qt6    
     rm -rf *
 fi
 
@@ -31,12 +31,16 @@ popd
 # "TESTQT.mon"
 pactl load-module module-null-sink sink_name=TESTQT sink_properties=device.description="TESTQT"
 
-echo "List audio devices: Qt5"
+echo -e "List audio devices: Qt5"
+pwd
 ./build_qt5/cons5_audiodevices
+pwd
+ls
 
-echo "List audio devices: Qt6"
+echo -e "\nList audio devices: Qt6"
+pwd
 ./build_qt6/cons6_audiodevices
 
-echo "Here's what aplay thinks:"
+echo -e "\n\nHere's what aplay thinks:"
 aplay -L
 
